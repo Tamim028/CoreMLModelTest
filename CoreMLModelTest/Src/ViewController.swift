@@ -11,14 +11,12 @@ import CoreML
 
 class ViewController: UIViewController {
     
-    private var modelInput: ModelInput!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.modelInput = ModelInput(shape: [6], inputValues: [0.0, 200.0, 207.0, 207.0, 76.421, 1990.0])
+        let mlInput = Input(shape: [6], values: [0.0, 200.0, 207.0, 207.0, 76.421, 1990.0])
         
-        let result = getModelPredictionFor(inputValues: modelInput)
+        let result = getModelPredictionFor(mlInput: mlInput)
         
         switch result.status {
         case .success:
@@ -33,11 +31,11 @@ class ViewController: UIViewController {
     
    
 extension ViewController {
-    private func getModelPredictionFor(inputValues: ModelInput) -> PredictionResult {
+    private func getModelPredictionFor(mlInput: Input) -> PredictionResult {
         do {
             let model = try RF_Model(configuration: MLModelConfiguration())
             
-            let inputShapedArray = MLShapedArray<Double>(scalars: modelInput.inputValues, shape: modelInput.shape)
+            let inputShapedArray = MLShapedArray<Double>(scalars: mlInput.values, shape: mlInput.shape)
             
             let model_input = RF_ModelInput(input: inputShapedArray)
             

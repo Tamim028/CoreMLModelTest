@@ -6,11 +6,11 @@
 //
 
 
-class ModelInput {
+class Input {
     let shape: [Int]
-    let inputValues: [Double]
-    init(shape: [Int], inputValues: [Double]) {
+    let values: [Double]
+    init(shape: [Int], values: [Double]) {
         self.shape = shape
-        self.inputValues = inputValues
+        self.values = values
     }
 }
